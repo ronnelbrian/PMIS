@@ -1,0 +1,39 @@
+		$tcode = 'ACC-0030';
+		$access = $data['access'] = $this->checkAuthorization->check($tcode);
+
+
+				if ($access == "r/w"){
+					$button = "";
+				}else{
+					$button = "";
+				}
+                                    <?php 
+                                      if ($access == 'r/w'){
+                                      ?> 
+
+               	  <?php } ?>
+
+               	  $this->savedata_model->logEvent($this->db->last_query());
+
+               	   <?php 
+                                      if ($access == 'r/w'){
+                                        echo ' <div class="panel panel-inverse">';
+                                      }else {
+                                         echo '<div class="panel panel-inverse" style="display:none">';
+                                      }
+                                      ?> 
+
+
+
+Course Fee College
+Tuition Fee College
+Miscellaneous Fee College
+Add Fee Sped
+Add Fee SHS
+Delete Fee Sped
+Delete Fee SHS
+Add Fee College
+Delete Fee College
+Payment Schedule - Sped
+Payment Schedule - SHS
+Payment Schedule - GS

@@ -1,0 +1,115 @@
+div.multi-step {
+	border-style:solid;
+	border-width:2px;
+	border-radius:8px;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;			/* without it, the box will be 2 pixels more than 100% wide */
+	display:table;
+	font-size:1em;
+	width:100%;
+}
+div.multi-step ol {
+	counter-reset:li;				/* initialize the step number */
+	display:table-row;
+	margin:0;
+	padding:0;
+}
+div.multi-step ol > li {
+	background-position:0 50%;
+	background-repeat:no-repeat;
+	display:table-cell;				/* table cells have equal heights */
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+div.multi-step ol > li:last-child {
+	border-radius:0 8px 8px 0;		/* we need to round those corners, otherwise the background will show over the rounded border */
+}
+div.multi-step ol > li:first-child {
+	border-radius:8px 0 0 8px;
+	background:none;
+}
+div.multi-step ol > li:first-child p {
+	margin-left:-20px;
+}
+div.multi-step ol > li.current p,
+div.multi-step ol > li.current .wrap,
+div.multi-step ol > li.current ~ li .wrap {
+	opacity:1;
+	filter:alpha(opacity=100);		/* this is for IE 8 */
+}
+div.multi-step ol > li .wrap {
+	min-height:20px;				/* the number is abolutely positioned, so I need to save some space */
+	padding:8px 8px 8px 52px;
+	position:relative;
+	opacity:0.5;
+	filter:alpha(opacity=50);
+}
+div.multi-step ol > li .wrap:before {
+	content:counter(li);			/* the step number is generated with CSS and placed in the :before pseudo-element */
+	counter-increment:li;
+	position:absolute;
+	top:4px;
+	left:20px;
+	border-style:solid;
+	border-width:2px;
+	border-radius:50%;
+	width:24px;
+	height:24px;
+	line-height:22px;
+	font-size:0.8em;
+	font-weight:bold;
+	text-align:center;
+}
+div.multi-step ol > li:first-child .wrap {
+	padding-left:58px;
+}
+div.multi-step ol > li:first-child .wrap:before {
+	left:4px;
+}
+div.multi-step ol > li p {
+	margin:0;
+}
+div.multi-step ol > li .title {
+	font-weight:bold;
+	line-height:1;
+}
+div.multi-step ol > li .subtitle {
+	font-size:0.8em;
+	line-height:1.2;
+	margin-top:0.4em;
+}
+
+
+/* specific widths are needed for each step (LI) since table-cell are only as wide as it's content needs by default
+   you should not really need less than three or more than five steps! */
+div.multi-step.three-steps ol > li {
+	width:34%;
+}
+div.multi-step.three-steps ol > li:first-child {
+	width:32%;
+}
+
+div.multi-step.four-steps ol > li {
+	width:26%;
+}
+div.multi-step.four-steps ol > li:first-child {
+	width:22%;
+}
+
+div.multi-step.five-steps ol > li {
+	width:20%;
+}
+
+
+/* IE 8 fixes */
+@media \0screen {
+	div.multi-step ol > li .wrap:before {
+		border-width:0;
+		top:6px;
+		left:22px;
+	}
+	div.multi-step ol > li:first-child .wrap:before {
+		left:6px;
+	}
+}

@@ -1,0 +1,9 @@
+[29-Sep-2015 09:27:08 America/Chicago] PHP Fatal error:  Cannot break/continue 1 level in /home/tfrjx1ac/public_html/mams_0927/application/controllers/mams.php on line 2637
+[29-Sep-2015 09:28:11 America/Chicago] PHP Fatal error:  Cannot break/continue 1 level in /home/tfrjx1ac/public_html/mams_0927/application/controllers/mams.php on line 2637
+[29-Sep-2015 15:13:02 America/Chicago] PHP Fatal error:  Call to undefined function result() in /home/tfrjx1ac/public_html/mams_0927/application/models/e_adjustment_get_model.php on line 851
+[29-Sep-2015 15:13:12 America/Chicago] PHP Fatal error:  Call to undefined function result() in /home/tfrjx1ac/public_html/mams_0927/application/models/e_adjustment_get_model.php on line 851
+[29-Sep-2015 15:16:21 America/Chicago] PHP Fatal error:  Call to undefined function result() in /home/tfrjx1ac/public_html/mams_0927/application/models/e_adjustment_get_model.php on line 851
+[29-Sep-2015 15:18:18 America/Chicago] PHP Fatal error:  Call to undefined function result() in /home/tfrjx1ac/public_html/mams_0927/application/models/e_adjustment_get_model.php on line 851
+[29-Sep-2015 15:51:28 America/Chicago] PHP Fatal error:  Cannot break/continue 1 level in /home/tfrjx1ac/public_html/mams_0927/application/controllers/mams.php on line 2637
+[05-Oct-2015 12:10:26 America/Chicago] PHP Fatal error:  Call to undefined method student_get_model::y_load_eptsubjectsnotset() in /home/tfrjx1ac/public_html/mams_0930/application/controllers/student.php on line 750
+[05-Oct-2015 12:11:57 America/Chicago] PHP Fatal error:  Call to undefined method student_get_model::y_load_eptsubjectsnotset() in /home/tfrjx1ac/public_html/mams_0930/application/controllers/student.php on line 750
