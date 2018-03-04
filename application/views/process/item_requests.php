@@ -284,7 +284,13 @@ function clearForm()
 {
   $('#id').val("");
   $('#office').val("");
-   <?php $option = ""; foreach($p as $r) $option .= '<option value="'.$r[0].'">'.$r[1].' ('.$r[2].')'.'</option> '+'';?>
+  var val = "";
+ <?php foreach($p as $r) 
+  {
+    $val = "'".$r[7]."'";
+    echo ' val += "<option value='.$val.'>'.htmlentities($r[1]).' ('.$r[2].')'.'</option>";';
+  }
+  ?>
   $('#divItems').empty();
   $('#divItems').append(' <input type="hidden" id="ctr" value = "1"/> '+
                         '<div class="form-group" id="row_1">'+
@@ -292,8 +298,8 @@ function clearForm()
                             '<label><b>Item</b></label>'+
                           '</div>'+
                           '<div class="col-md-3">'+
-                            '<select class="js-example-basic-single form-control" id="item_1" name="item[]" required>'+
-                              '<option value="">Select an Item</option>'+'<?php echo $option?></select>'+
+                            '<select class="populate" id="item_1" name="item[]" style="width:100%"  required>'+
+                              '<option value="">Select an Item</option>'+val+'</select>'+
                           '</div>'+
                           '<div class="col-md-1" style="text-align:right; padding-top:8px;">'+
                             '<label><b>Qty</b></label>'+
@@ -311,7 +317,7 @@ function clearForm()
                             '<input type="button" class="btn btn-primary" onClick="addNew(); $(this).hide()" id="btnAdd_1" name="btnAdd_[]" value="+"></input>'+
                           '</div>'+
                         '</div>');
-
+  $("#item_1").select2();
 }
 
 function resetForm()
@@ -334,7 +340,7 @@ function addNew()
   $('#ctr').val(ctr)
   $('#btnAdd_'+(ctr-1)).hide();
 
-  alert(ctr);
+  // alert(ctr);
   
   <?php foreach($p as $r) 
   {
@@ -348,7 +354,7 @@ function addNew()
       '<label><b>Item</b></label>'+
       '</div>'+
       '<div class="col-md-3">'+
-        '<select class="js-example-basic-single form-control" id="item_'+ctr+'" onChange="showUnit(this.value,'+ctr+')" name="item[]"" required>'+
+        '<select class="populate" id="item_'+ctr+'" onChange="showUnit(this.value,'+ctr+')" name="item[]"" style="width:100%" required>'+
           '<option value="">Select an Item</option>'+
           val
         +'</select>'+
@@ -369,6 +375,7 @@ function addNew()
 
       '</div>'+
   '</div>');
+  $("#item_"+ctr).select2();
 
   var ctr = $('#ctr').val();
   $('#btn_'+ctr).empty();
