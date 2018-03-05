@@ -97,7 +97,7 @@
 			<td colspan="5">(Total Amount in Words) 
 			<?php 
 
-			if($r['total_price'])
+			if(isset($r['total_price']))
 			echo convert_number_to_words($r['total_price']) 
 			?>
 				

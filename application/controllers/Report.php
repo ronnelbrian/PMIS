@@ -59,6 +59,7 @@ class Report extends CI_Controller {
 				$stat = "";
 			$q = $this->db->query("SELECT CONCAT(DATEPART(yyyy,p.date_added),'-',p.types,'-',pc.master_id,'-',p.category_id) stock_number,
 									  FORMAT(p.id,'0000') id,
+									  pc.id category_id,
 									  p.description,p.unit_price unit_value,
 									  un.code,
 									  p.critical_level,
