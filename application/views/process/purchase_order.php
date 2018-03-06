@@ -573,10 +573,10 @@ function loadPrice(val, id)
        dataType: 'json',
        cache: false,
        success: function(data)
-         {
-            $('#price_'+id).val(data); 
+         {  
+            $('#price_' + id).val(data); 
          },
-         error: function(data)
+       error: function(data)
          {
             alerts('An error occured. Please reload the page and try again.','e');
          }

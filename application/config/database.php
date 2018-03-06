@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'MAMA-PAPA';
+$db['default']['hostname'] = 'DESKTOP-EGBMCVU';
 $db['default']['username'] = 'sa';
 $db['default']['password'] = '1234';
 $db['default']['database'] = 'SPMS';
