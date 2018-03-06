@@ -41,17 +41,25 @@ class Process extends CI_Controller {
 
 					($r->title != '')?
 					(
-						($r->title == 'Purchase Request Disapproved' || $r->title == 'Item Request Disapproved')
+						($r->title == 'Purchase Request Disapproved' || $r->title == 'Item Request Disapproved' || $r->title == 'Item Request' || $r->title == 'Purchase Request')
 						?(
-							($r->title == 'Purchase Request Disapproved')
-							?base_url('Process/purchase_request')
-							:base_url('Process/item_requests_monitoring')
+							($r->title == 'Item Request Disapproved' || $r->title == 'Purchase Request Disapproved')
+							?(
+								($r->title == 'Purchase Request Disapproved')
+								?base_url('Process/purchase_request')
+								:base_url('Process/item_requests_monitoring')
+						 	 )
+							:(
+								($r->title == 'Purchase Request')
+								?base_url('Process/approve_purchase_requests')
+								:base_url('Process/approve_item_requests')
+						 	 )
 						)
 						:(
-							($r->title == 'Purchase Request')
-							?base_url('Process/approve_purchase_requests')
-							:base_url('Process/approve_item_requests')
-						)
+							($r->title == 'Purchase Request Approved')
+							?base_url('Process/purchase_order')
+							:base_url('Process/item_requests')
+						 )
 					)
 					:base_url('Process/approve_purchase_requests')
 					

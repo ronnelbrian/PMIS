@@ -47,7 +47,6 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-
 $db['default']['hostname'] = 'DESKTOP-EGBMCVU';
 $db['default']['username'] = 'sa';
 $db['default']['password'] = '1234';

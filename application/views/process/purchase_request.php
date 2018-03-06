@@ -505,7 +505,7 @@ function clearForm()
                             '<input type="text" class="form-control" name="unit[]" id="unit" placeholder="" readonly>'+
                           '</div>'+
                           '<div class="col-md-3">'+
-                            '<select class="form-control" id="item" name="item[]" style "width:100%" onChange="showUnit(this.value, 1)" required>'+ '<option value="">Select an Item</option>'+val+'</select>'+
+                            '<select class="populate" id="item" name="item[]" style="width:100%" onChange="showUnit(this.value, 1)" required>'+ '<option value="">Select an Item</option>'+val+'</select>'+
                           '</div>'+
                           '<div class="col-md-1">'+
                             '<input type="number" class="form-control" name="qty[]" id="qty" min="0" onchange="$('+comp_tot_cost+').val(($(this).val() * $('+comp_unit+').val())..toFixed(2))" placeholder="" required>'+
@@ -523,6 +523,7 @@ function clearForm()
                             '<center><input type="button" class="btn btn-primary" onClick="addNew(); $(this).hide()" id="btnAdd_1" name="btnAdd_[]" value="+"></input></center>'+
                           '</div>'+
                         '</div>');
+  $("#item").select2();
 }
 
 function resetForm()
@@ -586,12 +587,8 @@ function addNew()
         '<input type="text" class="form-control" name="unit[]" id="unit_'+ctr+'" readonly>'+
       '</div>'+
       '<div class="col-md-3">'+
-
-       '<select class="form-control" id="item_'+ctr+'" name="item[]" onChange="showUnit(this.value, '+ctr+')" required>'+
-          '<option value="">Select an Item</option>'+
+       '<select class="populate" id="item_'+ctr+'" name="item[]" onChange="showUnit(this.value, '+ctr+')" style="font-size:13px;width:100%" required>'+ '<option value="">Select an Item</option>'+
           val+'</select>'+
-
-
       '</div>'+
       '<div class="col-md-1">'+
         '<input type="number" class="form-control" name="qty[]" min = "0"  id="qty_'+ctr+'" onchange="$('+comp_tot_cost+').val(($(this).val() * $('+comp_unit+').val()).toFixed(2))" placeholder="" required>'+
@@ -609,6 +606,7 @@ function addNew()
 
       '</div>'+
   '</div>');
+  $("#item_"+ctr).select2();
 
   var ctr = $('#ctr').val();
   $('#btn_'+ctr).empty();
@@ -811,4 +809,5 @@ function showUnit(id, counter){
 $(document).ready(function(){
   loadtable();
 });
+
 </script>

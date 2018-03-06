@@ -759,7 +759,7 @@ class savedata_model extends CI_Model{
 									order by heirarchy", $ilid);
 
 			foreach($a->result() as $r)
-				if($r->approval_status == 0 || $r->approval_status == 1)
+				if($r->approval_status == 0 || $r->approval_status == 2)
 				{
 					$in = 1;
 					$this->notifApprover($liid, 1);
@@ -823,6 +823,20 @@ class savedata_model extends CI_Model{
 				date_default_timezone_set("Asia/Manila");
 				$this->db->where('id', $ilid);
 				$this->db->update('request_item_line', array('request_status' => 'Approved', 'remarks' => 'Item Released', 'released_by' => $this->session->userdata('USERID'), 'updated_by' => $this->session->userdata('USERID'), 'date_updated' => date('Y-m-d h:i:s')));
+
+				//If approved by second approver, make notif to requester
+				$s = $this->db->query("SELECT request_status
+ 								FROM request_item_line
+  								WHERE id = ?", $this->security->xss_clean($input['id']));
+				$output = $s->row()->request_status; //$s->result()[0]; 
+				
+				if($output == 'Approved')
+				{
+					$q = $this->db->query("SELECT added_by from request_item ri inner join request_item_line ril on ril.request_item_id = ri.id where ril.id = ?", $this->security->xss_clean($input['id']));
+
+				$this->db->insert('notifications', array('userid' => $q->result()[0]->added_by, 'title' => 'Item Request Approved', 'content' => "Your item request has been approved. Please go to Item Request to check further details.", 'date_added' => date('Y-m-d H:i:s')));
+				}
+
 
 				//Update the Inventory
 				$this->db->query("UPDATE inventory set old_stock = current_stock, current_stock = current_stock - ?, updated_by = ?, date_updated = GETDATE() where product = ? and status = 1", array($p->result()[0]->unit, $this->session->userdata('USERID'), $p->result()[0]->product));
@@ -1613,7 +1627,7 @@ if($input['act'] == 'disapprove')
 									order by heirarchy", $ilid);
 
 			foreach($a->result() as $r){
-				if($r->approval_status == 0 || $r->approval_status == 2)
+				if($r->approval_status == 0 || $r->approval_status == 1)
 				{
 					$in = 1;
 					$this->notifApproverPR($liid, 1);
@@ -1621,8 +1635,26 @@ if($input['act'] == 'disapprove')
 			}
 
 		  if($in == 0){
-			$this->db->where('id',$ilid);
-			 $this->db->update('purchase_request_line',array('request_status'=>'Approved','updated_by'=>$this->session->userdata('USERID'),'date_updated'=>date('Y-m-d h:i:s')));
+				$this->db->where('id',$ilid);
+			 	$this->db->update('purchase_request_line',array('request_status'=>'Approved','updated_by'=>$this->session->userdata('USERID'),'date_updated'=>date('Y-m-d h:i:s')));
+
+			 	//If approved by second approver, make notif to requester
+				$s = $this->db->query("SELECT request_status
+ 								FROM purchase_request_line
+  								WHERE id = ?", $this->security->xss_clean($input['id']));
+				$output = $s->row()->request_status; //$s->result()[0]; 
+				
+				if($output == 'Approved')
+				{
+					$q=$this->db->query("Select pr.added_by  from purchase_request as pr inner join purchase_request_line as prl on pr.id=prl.pr_id where prl.id=?",$this->security->xss_clean($input['id']));
+
+            		$this->db->insert('notifications',
+            		array('userid' =>$q->result()[0]->added_by,
+            				'title'=>'Purchase Request Approved',
+            				'content'=>"Your Purchase Request has been approved. Please go to Purchase Order to check further details.",
+            				'date_added'=>date('Y-m-d H:i:s')
+            		));
+				}
 		
 			$this->audit_trail('Approved Purchase Request '.$id);
 	     	}
