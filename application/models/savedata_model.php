@@ -1627,7 +1627,7 @@ if($input['act'] == 'disapprove')
 									order by heirarchy", $ilid);
 
 			foreach($a->result() as $r){
-				if($r->approval_status == 0 || $r->approval_status == 1)
+				if($r->approval_status == 0 || $r->approval_status == 2)
 				{
 					$in = 1;
 					$this->notifApproverPR($liid, 1);
