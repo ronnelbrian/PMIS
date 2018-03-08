@@ -518,7 +518,6 @@ function addNew()
 
 }
 
-
 function loadtable()
 {
   $('#spmsTable').dataTable().fnClearTable();

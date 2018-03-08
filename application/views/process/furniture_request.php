@@ -40,56 +40,60 @@
                             </select>
                           </div>    
                         </div>
-                       <div class="form-group" id="example-3" data-mfield-options='{"section": ".group","btnAdd":"#btnAdd-3","btnRemove":".btnRemove"}'>                                            
-                          <div class="col-md-12 group" ><br>
-                              <div class="col-md-1" style="text-align:right; padding-top:8px;">
-                            <label><b>Item Description</b><span style="color:red">*</span></label>
+                       <div class="form-group">                                            
+                          <div class="col-md-11 group" >
+                              <div class="col-md-2" style="text-align: center; padding-top:8px;">
+                            <label><b>Item Description</b><span style="color:right; color: red;">*</span></label>
+                              </div>
+                           <div class="col-md-2" style="text-align:center; padding-top:8px;">
+                            <label><b>Unit</b><span style="color:red; text-align: center;">*</span></label>
                           </div>
-                          <div class="col-md-2">
-                              <textarea class="form-control" rows="2" cols="6" id="item_desc" name="item_desc[]" required></textarea>
-                           </div> 
-                           <div class="col-md-1" style="text-align:right; padding-top:8px;">
-                            <label><b>Unit</b><span style="color:red">*</span></label>
+                          <div class="col-md-2" style="text-align:center; padding-top:8px;">
+                            <label><b>Quantity</b><span style="color:red">*</span></label>
                           </div>
-                          <div class="col-md-1" id="ctp_1" >
-                           <input type="text" class="form-control" name="unit[]" id="unit"  placeholder="pc(s)" required>
-                          </div> 
-                          <div class="col-md-1" style="text-align:right; padding-top:8px;">
-                            <label><b>Qty</b><span style="color:red">*</span></label>
-                          </div>
-                          <div class="col-md-1" id="ctp_1" >
-                           <input type="number" class="form-control" name="qty[]" id="qty" min = "0" onchange="$('#total_cost').val(($(this).val() * $('#unit_cost').val()).toFixed(2))" placeholder="" required>
-                          </div>
-                          <div class="col-md-1" style="text-align:right; padding-top:8px;">
+                          <div class="col-md-2" style="text-align:center; padding-top:8px;">
                             <label><b>Unit Cost</b><span style="color:red">*</span></label>
                           </div>
-                          <div class="col-md-1" id="ctp_2" >
-                            <input type="number" class="form-control" name="unit_cost[]" id="unit_cost" min = "0" onchange="$('#total_cost').val(($(this).val() * $('#qty').val()).toFixed(2))" placeholder="" required>
-                          </div>
-                            <!--<div class="col-md-1" style="text-align:right; padding-top:8px;">
-                            <label><b>Total Cost</b></label>
-                          </div>
-                          <div class="col-md-1" id="ctp_2" >
-                             <input type="text" class="form-control" name="total_cost[]" id="total_cost" placeholder="" readonly="readonly">
-                          </div>
-                          -->
-                             <div class="col-md-1" style="text-align:right; padding-top:8px;">
+                          <div class="col-md-2" style="text-align:center; padding-top:8px;">
                             <label><b>Purpose:</b><span style="color:red">*</span></label>
                           </div>
-                          <div class="col-md-1">
-                              <textarea class="form-control" rows="2" cols="10"  id="purpose" name="purpose[]" required></textarea>
+                          <div class="col-md-2" style="text-align:center; padding-top:8px;">
+                            <label><b>Action:</b></label>
+                          </div>
+                            </div>
+
+                      </div> 
+
+                       <div class="form-group" id="example-3" data-mfield-options='{"section": ".group","btnAdd":"#btnAdd-3","btnRemove":".btnRemove"}'>                                            
+                          <div class="col-md-11 group" ><br>
+                          <div class="col-md-2">
+                              <textarea style="height: 40px;" class="form-control" rows="2" cols="6" id="item_desc" name="item_desc[]" required></textarea>
+                           </div> 
+                          <div class="col-md-2" id="ctp_1" >
+                           <input type="text" class="form-control" name="unit[]" id="unit"  placeholder="pc(s)" required>
+                          </div> 
+                          <div class="col-md-2" id="ctp_1">
+                           <input type="number" class="form-control" name="qty[]" id="qty" min = "0" onchange="$('#total_cost').val(($(this).val() * $('#unit_cost').val()).toFixed(2))" placeholder="" required>
+                          </div>
+                          <div class="col-md-2" id="ctp_2" >
+                            <input type="number" class="form-control" name="unit_cost[]" id="unit_cost" min = "0" onchange="$('#total_cost').val(($(this).val() * $('#qty').val()).toFixed(2))" placeholder="" required>
+                          </div>
+                          <div class="col-md-2">
+                              <textarea style="height: 40px;" class="form-control" rows="2" cols="10"  id="purpose" name="purpose[]" required></textarea>
                            </div>  
 
-                            <div class="col-md-1"  >
-                            <center><button type="button" id="btnAdd-3" class="btn btn-primary btnAdd-3">+</button>
-                            <button type="button" class="btn btn-danger btnRemove">x</button>
-                           </center>
+                            <div class="col-md-2"  >
+                              <center>
+                            <button type="button" class="btn btn-danger btnRemove">-</button>
+                            <button type="button" id="btnAdd-3" class="btn btn-primary btnAdd-3">+</button>
+                              </center>
                           </div>  
 
 
                             </div>
 
-  </div>                      <?php if($w_ == 1) { ?>
+                      </div>             
+                <?php if($w_ == 1) { ?>
                       <div class="panel-footer">
                           <div class="row">
                               <div class="col-lg-offset-2 col-lg-10">

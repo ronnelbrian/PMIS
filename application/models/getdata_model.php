@@ -3236,9 +3236,12 @@ public function category_id($id , $prop = 0, $get = 0)
 
 			$data = array();
 			$id = $this->security->xss_clean($input['id']);
-			$a = $this->db->query("SELECT fr_id, item_desc, unit_cost 
-				FROM furniture_request_line
-				ORDER BY date_added DESC");
+			$a = $this->db->query("SELECT DISTINCT frl.fr_id, frl.item_desc, frl.unit_cost 
+				FROM furniture_request_line frl
+				INNER JOIN furniture_request_line_approval frla
+				ON frl.id = frla.furniture_request_line_id
+				WHERE frla.approval_status = 1
+				");
 
 			foreach($a -> result() as $r)
 			{
@@ -3312,6 +3315,32 @@ public function category_id($id , $prop = 0, $get = 0)
 
      public function job_order($act, $input = array()){
      		$result = array();
+
+     	if($act == 'initProduct')
+		{
+
+			$data = array();
+			$id = $this->security->xss_clean($input['id']);
+			$a = $this->db->query("SELECT jr_id, item_desc, unit_cost
+				FROM job_request_line
+				ORDER BY date_added DESC
+				");
+
+			foreach($a -> result() as $r)
+			{
+				   // $categories = $this->category($r->category_id,0)[0]['desc'];
+			
+				$data[] = array(
+					$r->jr_id,
+					$r->item_desc,
+					$r->unit_cost
+				);
+			}
+
+			$result = array('mes' => 'Success', 'data' => $data);
+
+		}
+
 		if($act == 'loadtable')
 		{
 			$statement = "";
