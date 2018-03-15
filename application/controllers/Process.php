@@ -1317,6 +1317,19 @@ public function purchase_request()
 
 		if(in_array('JO',$ac)){
 
+			if(isset($_POST['initProduct']))
+			{
+				echo json_encode($this->getdata_model->job_order('initProduct',$_POST));
+				
+				exit();
+			}
+
+			if(isset($_POST['loadPrice']))
+			{
+				$q = $this->db->query("SELECT unit_cost FROM job_request_line WHERE jr_id = ?", $this->security->xss_clean($_POST['id']));
+				echo json_encode($q->result()[0]->unit_cost);
+				exit();
+			}
 			if(isset($_GET['loadtable']))
 			{
 				$output = $this->getdata_model->job_order('loadtable', $_GET);
@@ -1451,6 +1464,20 @@ public function purchase_request()
 		$ac = $this->validation_model->access();
 
 		if(in_array('FEO',$ac)){
+
+			if(isset($_POST['initProduct']))
+			{
+				echo json_encode($this->getdata_model->furniture_order('initProduct',$_POST));
+				
+				exit();
+			}
+
+			if(isset($_POST['loadPrice']))
+			{
+				$q = $this->db->query("SELECT unit_cost from furniture_request_line where id = ?", $this->security->xss_clean($_POST['id']));
+				echo json_encode($q->result()[0]->unit_cost);
+				exit();
+			}
 
 			if(isset($_GET['loadtable']))
 			{
