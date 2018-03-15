@@ -841,6 +841,10 @@ class savedata_model extends CI_Model{
 				//Update the Inventory
 				$this->db->query("UPDATE inventory set old_stock = current_stock, current_stock = current_stock - ?, updated_by = ?, date_updated = GETDATE() where product = ? and status = 1", array($p->result()[0]->unit, $this->session->userdata('USERID'), $p->result()[0]->product));
 
+				$bl = $this->db->query("SELECT current_stock FROM inventory WHERE product = ?", $p->result()[0]->product);
+
+				$this->db->query("UPDATE request_item_line set  current_stock = ? where product = ? and status = 1", array($bl->result()[0]->current_stock, $p->result()[0]->product));
+
 				//Add to office's Expense
 				$qd = $this->db->query("SELECT office_id, product, unit qty, ri.added_by 
 										FROM request_item ri 
@@ -1154,6 +1158,8 @@ class savedata_model extends CI_Model{
 
 			}
 
+			$bl = $this->db->query("SELECT current_stock FROM inventory WHERE product = ?",  $qp->result()[0]->product);
+
 			$data = array(
 				'pol_id' => $pol_id,
 				'added_by' => $this->session->userdata('USERNAME'),
@@ -1164,7 +1170,8 @@ class savedata_model extends CI_Model{
 				'actual_unit_price' => $actual_unit_price,
 				'actual_discount' => $actual_discount,
 				'actual_amount' => $actual_amount,
-				'remarks' => $remarks);
+				'remarks' => $remarks,
+				'current_stock' => $bl->result()[0]->current_stock);
 			$this->db->insert('delivery',$data);
 
 			$did = $this->db->insert_id();

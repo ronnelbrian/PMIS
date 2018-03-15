@@ -94,6 +94,9 @@
 				<b>Released</b>
 			</td>
 		<?php }?>
+			<td width="10%" style="text-align:center; border-bottom:1px solid">
+				<b>Balance</b>
+			</td>
 		</tr>
 		<?php
 			$ctr = 0; 
@@ -115,6 +118,8 @@
 					echo '<td style="text-align:center">'.$r['delivered'].'</td>';
 				if(in_array('released', $columns))
 					echo '<td style="text-align:center">'.$r['released'].'</td>';
+
+					echo '<td style="text-align:center">'.$r['balance'].'</td>';
 				echo '</tr>';
 
 				if($ctr == 35)
@@ -177,6 +182,11 @@
 				}
 				$no++;
 			}
+
+			// echo '<tr style="border-top:0.5px solid">
+			// 		<td colspan="4" style="text-align:right;"> </td>
+			// 		<td style="text-align:center;">'.$bal.'</td>
+			// 	</tr>';
 		?>
 	</table>
 

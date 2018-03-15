@@ -2550,7 +2550,7 @@ public function category_id($id , $prop = 0, $get = 0)
 
 			if($status == 'all')
 			{
-				$q = $this->db->query("SELECT * from (SELECT CONCAT('IR-',FORMAT(ril.id,'00000')) id, p.description, unit qty, u.code, ril.date_updated action_date,  CONVERT(VARCHAR,ril.date_updated,101) released, '' delivered
+				$q = $this->db->query("SELECT * from (SELECT CONCAT('IR-',FORMAT(ril.id,'00000')) id, p.description, unit qty, u.code, ril.date_updated action_date,  CONVERT(VARCHAR,ril.date_updated,101) released, '' delivered, ril.current_stock balance
 					FROM request_item_line ril 
 					INNER JOIN product p 
 					ON p.id = ril.product $cond
@@ -2560,7 +2560,7 @@ public function category_id($id , $prop = 0, $get = 0)
 
 					UNION
 
-					SELECT CONCAT('D-',FORMAT(d.id, '00000')) id, p.description, qty_received qty, u.code, d.date_added action_date, '' released , CONVERT(VARCHAR,d.date_added,101) delivered
+					SELECT CONCAT('D-',FORMAT(d.id, '00000')) id, p.description, qty_received qty, u.code, d.date_added action_date, '' released , CONVERT(VARCHAR,d.date_added,101) delivered, d.current_stock balance
 					FROM delivery d
 					INNER JOIN product p 
 					ON p.id = d.product $cond
@@ -2570,7 +2570,7 @@ public function category_id($id , $prop = 0, $get = 0)
 
 					UNION
 
-					SELECT CONCAT('M-',FORMAT(mpp.id,'00000')) id, p.description, mpp.qty, u.code, mpp.date_added action_date, '' released , CONVERT(VARCHAR,mpp.date_added,101) delivered
+					SELECT CONCAT('M-',FORMAT(mpp.id,'00000')) id, p.description, mpp.qty, u.code, mpp.date_added action_date, '' released , CONVERT(VARCHAR,mpp.date_added,101) delivered, '0' balance
 					FROM manual_product_property mpp
 					INNER JOIN product p 
 					ON p.id = mpp.product  $cond
@@ -2579,7 +2579,7 @@ public function category_id($id , $prop = 0, $get = 0)
 					WHERE mpp.status = 1 and mpp.date_added between '$start' and '$end 23:59:59') tbl order by action_date desc");
 			}
 			else if($status == 'in')
-				$q = $this->db->query("SELECT * from (SELECT CONCAT('D-',FORMAT(d.id, '00000')) id, p.description, qty_received qty, u.code, d.date_added action_date, CONVERT(VARCHAR,d.date_added,101) delivered, '' released
+				$q = $this->db->query("SELECT * from (SELECT CONCAT('D-',FORMAT(d.id, '00000')) id, p.description, qty_received qty, u.code, d.date_added action_date, CONVERT(VARCHAR,d.date_added,101) delivered, '' released, d.current_stock balance
 					FROM delivery d
 					INNER JOIN product p 
 					ON p.id = d.product $cond
@@ -2589,7 +2589,7 @@ public function category_id($id , $prop = 0, $get = 0)
 
 					UNION
 
-					SELECT CONCAT('M-',FORMAT(mpp.id,'00000')) id, p.description, mpp.qty, u.code, mpp.date_added action_date, CONVERT(VARCHAR,mpp.date_added,101) delivered, '' released
+					SELECT CONCAT('M-',FORMAT(mpp.id,'00000')) id, p.description, mpp.qty, u.code, mpp.date_added action_date, CONVERT(VARCHAR,mpp.date_added,101) delivered, '' released, '0' balance
 					FROM manual_product_property mpp
 					INNER JOIN product p 
 					ON p.id = mpp.product  $cond
@@ -2597,7 +2597,7 @@ public function category_id($id , $prop = 0, $get = 0)
 					ON u.id = p.measurement
 					WHERE mpp.status = 1 and mpp.date_added between '$start' and '$end 23:59:59') tbl order by action_date desc");
 			else if($status == 'out')
-				$q = $this->db->query("SELECT CONCAT('IR-',FORMAT(ril.id,'00000')) id, p.description, unit qty, u.code, ril.date_updated action_date, CONVERT(VARCHAR,ril.date_updated,101) released, '' delivered
+				$q = $this->db->query("SELECT CONCAT('IR-',FORMAT(ril.id,'00000')) id, p.description, unit qty, u.code, ril.date_updated action_date, CONVERT(VARCHAR,ril.date_updated,101) released, '' delivered, ril.current_stock balance
 					FROM request_item_line ril 
 					INNER JOIN product p 
 					ON p.id = ril.product $cond
@@ -2613,7 +2613,8 @@ public function category_id($id , $prop = 0, $get = 0)
 					'description' => $r->description,
 					'qty' => $r->qty.' '.$r->code, 
 					'delivered' => $r->delivered,
-					'released' => $r->released);
+					'released' => $r->released,
+					'balance' => $r->balance);
 			}
 			return $result;
 		}
