@@ -47,9 +47,9 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-$db['default']['hostname'] = 'DESKTOP-EGBMCVU';
+$db['default']['hostname'] = 'PUP-MTRCB';
 $db['default']['username'] = 'sa';
-$db['default']['password'] = '1234';
+$db['default']['password'] = 'mtrcb';
 $db['default']['database'] = 'SPMS';
 $db['default']['dbdriver'] = 'sqlsrv';
 $db['default']['dbprefix'] = '';
