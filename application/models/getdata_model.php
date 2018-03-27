@@ -1857,7 +1857,7 @@ public function category_id($id , $prop = 0, $get = 0)
 			$id = $this->security->xss_clean($input['id']);
 
 
-			$a = $this->db->query("SELECT p.id, p.description name,p.category_id category_id
+			$a = $this->db->query("SELECT DISTINCT p.id, p.description name,p.category_id category_id
 									FROM supplier_product sp 
 									INNER JOIN product p 
 									/*ON p.id = sp.product_id
@@ -1871,7 +1871,8 @@ public function category_id($id , $prop = 0, $get = 0)
 			
 				$data[] = array(
 					$r->id,
-					$categories
+					$categories,
+					$r->name
 					/*$r->name*/
 				);
 			}

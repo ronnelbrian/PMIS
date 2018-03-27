@@ -549,7 +549,7 @@ function initProduct()
           {
             if (data['mes'] == "Success")
               for(var i = 0; i<data['data'].length; i++)
-                $('#item_1').append('<option value="'+data['data'][i][0]+'">'+data['data'][i][1]+'</option>');
+                $('#item_1').append('<option value="'+data['data'][i][0]+'">'+data['data'][i][2]+' ('+data['data'][i][1]+')'+'</option>');
             else
               alerts('An error occured. Please reload the page and try again.','w');
            },
